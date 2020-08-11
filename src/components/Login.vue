@@ -36,6 +36,22 @@ export default {
         return
       }
       alert('id : ' + username + ' ' + 'pwd : ' + passowrd)
+      // LOGIN 액션 실행
+      // this.$store.dispatch('LOGIN', {email, password})
+      //  .then(() => this.redirect())
+      //  .catch(({message}) => this.msg = message)
+    },
+    redirect () {
+      const { search } = window.location
+      const tokens = search.replace(/^\?/, '').split('&')
+      const { returnPath } = tokens.reduce((qs, tkn) => {
+        const pair = tkn.split('=')
+        qs[pair[0]] = decodeURIComponent(pair[1])
+        return qs
+      }, {})
+
+      // 리다이렉트 처리
+      this.$router.push(returnPath)
     }
   }
 }
